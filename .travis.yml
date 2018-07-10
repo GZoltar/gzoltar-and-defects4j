@@ -1,0 +1,204 @@
+language: perl
+perl:
+  - "5.24"
+
+jdk:
+  - openjdk7
+
+addons:
+  apt:
+    packages:
+      - openjdk-7-jdk
+
+install:
+# switch to Java-7
+  - jdk_switcher use openjdk7
+# get apache ant
+  - wget --no-check-certificate http://www-eu.apache.org/dist//ant/binaries/apache-ant-1.9.12-bin.zip
+  - unzip -o -q apache-ant-1.9.12-bin.zip
+  - mv apache-ant-1.9.12 apache-ant
+# get and prepare D4J
+  - git clone https://github.com/jose/defects4j.git defects4j
+  - pushd .
+  - cd defects4j
+  - git checkout fault-localization
+  - (echo y;echo o conf prerequisites_policy follow;echo o conf commit) | cpan
+  - cpan install Carton
+  - carton install
+  - ./init.sh
+  - popd
+
+before_script:
+  - export ANT_HOME=$TRAVIS_BUILD_DIR/apache-ant
+  - export D4J_HOME=$TRAVIS_BUILD_DIR/defects4j
+  - cd $D4J_HOME
+
+jobs:
+  include:
+    - stage: Test
+### Chart
+      script: for bid in $(seq 1 13); do carton exec $TRAVIS_BUILD_DIR/main.sh Chart $bid || exit 1; done
+    - script: for bid in $(seq 14 26); do carton exec $TRAVIS_BUILD_DIR/main.sh Chart $bid || exit 1; done
+### Closure
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 1
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 2
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 3
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 4
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 5
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 6
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 7
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 8
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 9
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 10
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 11
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 12
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 13
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 14
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 15
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 16
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 17
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 18
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 19
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 20
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 21
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 22
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 23
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 24
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 25
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 26
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 27
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 28
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 29
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 30
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 31
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 32
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 33
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 34
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 35
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 36
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 37
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 38
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 39
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 40
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 41
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 42
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 43
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 44
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 45
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 46
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 47
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 48
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 49
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 50
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 51
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 52
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 53
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 54
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 55
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 56
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 57
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 58
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 59
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 60
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 61
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 62
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 63
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 64
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 65
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 66
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 67
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 68
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 69
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 70
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 71
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 72
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 73
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 74
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 75
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 76
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 77
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 78
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 79
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 80
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 81
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 82
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 83
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 84
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 85
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 86
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 87
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 88
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 89
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 90
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 91
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 92
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 93
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 94
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 95
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 96
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 97
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 98
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 99
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 100
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 101
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 102
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 103
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 104
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 105
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 106
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 107
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 108
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 109
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 110
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 111
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 112
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 113
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 114
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 115
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 116
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 117
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 118
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 119
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 120
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 121
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 122
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 123
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 124
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 125
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 126
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 127
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 128
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 129
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 130
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 131
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 132
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 133
+### Lang
+    - script: for bid in $(seq 1 30); do carton exec $TRAVIS_BUILD_DIR/main.sh Lang $bid || exit 1; done
+    - script: for bid in $(seq 31 65); do carton exec $TRAVIS_BUILD_DIR/main.sh Lang $bid || exit 1; done
+### Math
+    - script: for bid in $(seq 1 20); do carton exec $TRAVIS_BUILD_DIR/main.sh Math $bid || exit 1; done
+    - script: for bid in $(seq 21 40); do carton exec $TRAVIS_BUILD_DIR/main.sh Math $bid || exit 1; done
+    - script: for bid in $(seq 41 58); do carton exec $TRAVIS_BUILD_DIR/main.sh Math $bid || exit 1; done
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 59
+    - script: for bid in $(seq 60 80); do carton exec $TRAVIS_BUILD_DIR/main.sh Math $bid || exit 1; done
+    - script: for bid in $(seq 81 100); do carton exec $TRAVIS_BUILD_DIR/main.sh Math $bid || exit 1; done
+    - script: for bid in $(seq 101 106); do carton exec $TRAVIS_BUILD_DIR/main.sh Math $bid || exit 1; done
+### Mockito
+    - script: for bid in $(seq 1 3); do travis_wait 15 carton exec $TRAVIS_BUILD_DIR/main.sh Mockito $bid || exit 1; done
+    - script: for bid in $(seq 4 6); do travis_wait 15 carton exec $TRAVIS_BUILD_DIR/main.sh Mockito $bid || exit 1; done
+    - script: for bid in $(seq 7 9); do travis_wait 15 carton exec $TRAVIS_BUILD_DIR/main.sh Mockito $bid || exit 1; done
+    - script: for bid in $(seq 10 12); do travis_wait 15 carton exec $TRAVIS_BUILD_DIR/main.sh Mockito $bid || exit 1; done
+    - script: for bid in $(seq 13 15); do travis_wait 15 carton exec $TRAVIS_BUILD_DIR/main.sh Mockito $bid || exit 1; done
+    - script: for bid in $(seq 16 18); do travis_wait 15 carton exec $TRAVIS_BUILD_DIR/main.sh Mockito $bid || exit 1; done
+    - script: for bid in $(seq 19 21); do travis_wait 15 carton exec $TRAVIS_BUILD_DIR/main.sh Mockito $bid || exit 1; done
+    - script: for bid in $(seq 22 24); do travis_wait 15 carton exec $TRAVIS_BUILD_DIR/main.sh Mockito $bid || exit 1; done
+    - script: for bid in $(seq 25 27); do travis_wait 15 carton exec $TRAVIS_BUILD_DIR/main.sh Mockito $bid || exit 1; done
+    - script: for bid in $(seq 28 30); do travis_wait 15 carton exec $TRAVIS_BUILD_DIR/main.sh Mockito $bid || exit 1; done
+    - script: for bid in $(seq 31 33); do travis_wait 15 carton exec $TRAVIS_BUILD_DIR/main.sh Mockito $bid || exit 1; done
+    - script: for bid in $(seq 34 36); do travis_wait 15 carton exec $TRAVIS_BUILD_DIR/main.sh Mockito $bid || exit 1; done
+    - script: for bid in $(seq 37 38); do travis_wait 15 carton exec $TRAVIS_BUILD_DIR/main.sh Mockito $bid || exit 1; done
+### Time
+    - script: for bid in $(seq 1 10); do carton exec $TRAVIS_BUILD_DIR/main.sh Time $bid || exit 1; done
+    - script: for bid in $(seq 11 20); do carton exec $TRAVIS_BUILD_DIR/main.sh Time $bid || exit 1; done
+    - script: for bid in $(seq 21 27); do carton exec $TRAVIS_BUILD_DIR/main.sh Time $bid || exit 1; done
