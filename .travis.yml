@@ -2,17 +2,26 @@ language: perl
 perl:
   - "5.24"
 
-jdk:
-  - openjdk7
+os: linux
 
-addons:
-  apt:
-    packages:
-      - openjdk-7-jdk
+cache:
+  directories:
+    - /home/travis/.java/
+
+before_install:
+  - JDK_OS="$TRAVIS_OS_NAME"
+  - JDK_ARCH="x64"
+  - JDK_VERSION="7u80"
+  - JDK_BUILD_VERSION="$JDK_VERSION-b15"
+  - JDK_FILE="jdk-$JDK_VERSION-$JDK_OS-$JDK_ARCH.tar.gz"
+  - JDK_URL="http://people.cs.umass.edu/~rjust/defects4j/download/$JDK_FILE";
+  - if [ ! -f "$JDK_FILE" ]; then mkdir -p /home/travis/.java && wget -nv  "$JDK_URL" && tar -xzf "$JDK_FILE" -C /home/travis/.java; fi
 
 install:
 # switch to Java-7
-  - jdk_switcher use openjdk7
+  - export JAVA_HOME=/home/travis/.java/jdk1.7.0_80
+  - export PATH=$JAVA_HOME/bin:$PATH
+  - java -version
 # get apache ant
   - wget --no-check-certificate http://www-eu.apache.org/dist//ant/binaries/apache-ant-1.9.12-bin.zip
   - unzip -o -q apache-ant-1.9.12-bin.zip
