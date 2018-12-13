@@ -23,9 +23,9 @@ install:
   - export PATH=$JAVA_HOME/bin:$PATH
   - java -version
 # get apache ant
-  - wget --no-check-certificate http://www-eu.apache.org/dist//ant/binaries/apache-ant-1.9.12-bin.zip
-  - unzip -o -q apache-ant-1.9.12-bin.zip
-  - mv apache-ant-1.9.12 apache-ant
+  - wget --no-check-certificate http://apache.mirrors.lucidnetworks.net//ant/binaries/apache-ant-1.9.13-bin.zip
+  - unzip -o -q apache-ant-1.9.13-bin.zip
+  - mv apache-ant-1.9.13 apache-ant
 # get and prepare D4J
   - git clone https://github.com/jose/defects4j.git defects4j
   - pushd .
