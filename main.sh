@@ -21,7 +21,6 @@
 # - D4J_HOME   Needs to be set and must point to the Defects4J installation.
 # 
 # ------------------------------------------------------------------------------
-set -e # makes the shell to fail if any command returns a non-zero status
 
 SCRIPT_DIR=$(cd `dirname $0` && pwd)
 source "$SCRIPT_DIR/utils.sh" || exit 1
@@ -316,6 +315,8 @@ elif [ "$num_buggy_lines" -ne "$num_unrankable_lines" ]; then
 else
   echo "[INFO] Do all test cases cover at least one buggy-line? Check cannot be performed as there is not any rankable line."
 fi
+
+echo "DONE!"
 
 # Clean up
 rm -rf "$tmp_dir"
