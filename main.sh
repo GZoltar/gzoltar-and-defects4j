@@ -71,9 +71,9 @@ echo "[INFO] End: $(date)"
 
 # ---------------------------------------------------------------- Sanity checks
 
-TESTS_FILE="$tmp_dir/tests"
-SPECTRA_FILE="$tmp_dir/spectra"
-MATRIX_FILE="$tmp_dir/matrix"
+TESTS_FILE="$tmp_dir/sfl/txt/tests.csv"
+SPECTRA_FILE="$tmp_dir/sfl/txt/spectra.csv"
+MATRIX_FILE="$tmp_dir/sfl/txt/matrix.txt"
 SOURCE_CODE_LINES_FILE="$tmp_dir/source_code_lines.txt"
 
 _is_a_known_exception "$PID" "$BID"

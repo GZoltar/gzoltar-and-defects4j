@@ -89,13 +89,13 @@ _fault_localization() {
     return 1
   fi
 
-  # Remove extension
-  mv "$spectra_file" $(dirname "$spectra_file")/$(basename "$spectra_file" .csv) || return 1
-  spectra_file=$(dirname "$spectra_file")/$(basename "$spectra_file" .csv)
-  mv "$matrix_file" $(dirname "$matrix_file")/$(basename "$matrix_file" .txt) || return 1
-  matrix_file=$(dirname "$matrix_file")/$(basename "$matrix_file" .txt)
-  mv "$tests_file" $(dirname "$tests_file")/$(basename "$tests_file" .csv) || return 1
-  tests_file=$(dirname "$tests_file")/$(basename "$tests_file" .csv)
+#  # Remove extension
+#  mv "$spectra_file" $(dirname "$spectra_file")/$(basename "$spectra_file" .csv) || return 1
+#  spectra_file=$(dirname "$spectra_file")/$(basename "$spectra_file" .csv)
+#  mv "$matrix_file" $(dirname "$matrix_file")/$(basename "$matrix_file" .txt) || return 1
+#  matrix_file=$(dirname "$matrix_file")/$(basename "$matrix_file" .txt)
+#  mv "$tests_file" $(dirname "$tests_file")/$(basename "$tests_file" .csv) || return 1
+#  tests_file=$(dirname "$tests_file")/$(basename "$tests_file" .csv)
 
   # Remove header
   tail -n +2 "$spectra_file" > "$spectra_file.tmp" && mv -f "$spectra_file.tmp" "$spectra_file" || return 1
