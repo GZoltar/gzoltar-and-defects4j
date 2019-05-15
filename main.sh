@@ -29,10 +29,13 @@ source "$SCRIPT_DIR/utils.sh" || exit 1
 
 # Check whether JAVA_HOME is set
 [ "$JAVA_HOME" != "" ] || die "[ERROR] JAVA_HOME is not set!"
+[ -d "$JAVA_HOME" ] || die "$JAVA_HOME does not exist!"
 # Check whether ANT_HOME is set
 [ "$ANT_HOME" != "" ] || die "[ERROR] ANT_HOME is not set!"
+[ -d "$ANT_HOME" ] || die "$ANT_HOME does not exist!"
 # Check whether D4J_HOME is set
 [ "$D4J_HOME" != "" ] || die "[ERROR] D4J_HOME is not set!"
+[ -d "$D4J_HOME" ] || die "$D4J_HOME does not exist!"
 
 export PATH="$JAVA_HOME/bin:$ANT_HOME/bin:$PATH"
 
