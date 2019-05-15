@@ -1,31 +1,33 @@
 #!/usr/bin/env bash
 
-PWD=`pwd`
+PWD=$(cd `dirname ${BASH_SOURCE[0]}` && pwd)
 
-export MALLOC_ARENA_MAX=1 # Iceberg's requirement
 export TZ='America/Los_Angeles' # some D4J's requires this specific TimeZone
 
-export _JAVA_OPTIONS="-Xmx2048M -XX:MaxHeapSize=1024M"
+export _JAVA_OPTIONS="-Xmx4096M -XX:MaxHeapSize=2048M"
 export MAVEN_OPTS="-Xmx1024M"
-export ANT_OPTS="-Xmx2048M -XX:MaxHeapSize=1024M"
+export ANT_OPTS="-Xmx4096M -XX:MaxHeapSize=2048M"
 
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export LANGUAGE=en_US.UTF-8
 
-##
+# Speed up grep command
+alias grep="LANG=C grep"
+
+#
 # Prints error message to the stdout and exit.
-##
+#
 die() {
   echo "$@" >&2
   exit 1
 }
 
-##
+#
 # Checkouts a D4J's project-bug.
-##
+#
 _checkout() {
-  local USAGE="Usage: _checkout <pid> <bid> <fixed (f) or buggy (b)>"
+  local USAGE="Usage: ${FUNCNAME[0]} <pid> <bid> <fixed (f) or buggy (b)>"
   if [ "$#" != 3 ]; then
     echo "$USAGE" >&2
     return 1
@@ -35,73 +37,102 @@ _checkout() {
   local bid="$2"
   local version="$3" # either b or f
 
-  local output_dir="/tmp/$USER/gz-d4j/_$$-$pid-$bid"
-  rm -rf "$output_dir"
-  mkdir -p "$output_dir"
-  "$D4J_HOME/framework/bin/defects4j" checkout -p "$pid" -v "${bid}$version" -w "$output_dir" || return 1
+  local output_dir="/tmp/$USER-$$-$pid-$bid"
+  rm -rf "$output_dir"; mkdir -p "$output_dir"
+  "$D4J_HOME/framework/bin/defects4j" checkout -p "$pid" -v "${bid}$version" -w "$output_dir"
+  if [ $? -ne 0 ]; then
+    if _am_I_a_cluster; then
+      rm -rf "$output_dir"
+
+      # trying another directory
+      output_dir="/scratch/$USER-$$-$pid-$bid"
+      rm -rf "$output_dir"; mkdir -p "$output_dir"
+      "$D4J_HOME/framework/bin/defects4j" checkout -p "$pid" -v "${bid}$version" -w "$output_dir" || return 1
+    else
+      return 1
+    fi
+  fi
+
+  if [ "$pid" == "Time" ]; then
+    if [ "$bid" -eq "18" ] || [ "$bid" -eq "22" ] || [ "$bid" -eq "24" ] || [ "$bid" -eq "27" ]; then
+      # For Time-{18, 22, 24, and 27}, test case 'org.joda.time.TestPeriodType::testForFields4'
+      # only fails when executed in isolation, i.e., it does not fail when it is
+      # executed in the same JVM as other test cases from the same test class
+      # but it does fail if executed in a single JVM. As it does not cover any
+      # buggy code, it is safe to conclude it is a dependent test case and could
+      # be excluded. Ideally, it should be discarded by the D4J checkout command,
+      # however, as the same test class, including test case 'testForFields4',
+      # is also executed by other Time bugs we took a conservative approach and
+      # only discard it for bugs Time-{18, 22, 24, and 27}.
+      pushd . > /dev/null 2>&1
+      cd "$output_dir"
+        echo "--- org.joda.time.TestPeriodType::testForFields4" > extra.dependent_tests
+        "$D4J_HOME/framework/util/rm_broken_tests.pl" extra.dependent_tests $("$D4J_HOME/framework/bin/defects4j" export -p dir.src.tests) || return 1
+      popd > /dev/null 2>&1
+    fi
+  fi
 
   echo "$output_dir"
   return 0
 }
 
-##
 #
-##
-_fault_localization() {
-  local USAGE="Usage: _fault_localization <pid> <bid> <tmp_dir>"
+# Runs GZoltar fault localization tool on a specific D4J's project-bug.
+#
+_run_gzoltar() {
+  local USAGE="Usage: ${FUNCNAME[0]} <pid> <bid> <tmp_dir>"
   if [ "$#" != 3 ]; then
     echo "$USAGE" >&2
     return 1
   fi
 
+  [ "$D4J_HOME" != "" ] || die "[ERROR] D4J_HOME is not set!"
+  [ -d "$D4J_HOME" ] || die "[ERROR] $D4J_HOME does not exist!"
+
   local pid="$1"
   local bid="$2"
   local tmp_dir="$3"
 
+  echo "[INFO] Start: $(date)" >&2
   "$D4J_HOME/framework/bin/defects4j" fault-localization \
-      -w "$tmp_dir" \
-      -y sfl \
-      -e ochiai \
-      -g line || return 1
+        -w "$tmp_dir" \
+        -y sfl \
+        -e ochiai \
+        -g line || return 1
+  echo "[INFO] End: $(date)" >&2
 
+  local ser_file="$tmp_dir/gzoltar.ser"
   local spectra_file="$tmp_dir/sfl/txt/spectra.csv"
   local matrix_file="$tmp_dir/sfl/txt/matrix.txt"
   local tests_file="$tmp_dir/sfl/txt/tests.csv"
   local source_code_lines_file="$tmp_dir/source_code_lines.txt"
 
-  if [ ! -s "$spectra_file" ]; then
-    echo "Spectra file '$spectra_file' is empty or does not exist" >&2
-    return 1
-  fi
+  [ -s "$ser_file" ] || die "[ERROR] $ser_file does not exist or it is empty!"
+  [ -s "$spectra_file" ] || die "[ERROR] $spectra_file does not exist or it is empty!"
+  [ -s "$matrix_file" ] || die "[ERROR] $matrix_file does not exist or it is empty!"
+  [ -s "$tests_file" ] || die "[ERROR] $tests_file does not exist or it is empty!"
+  [ -s "$source_code_lines_file" ] || die "[ERROR] $source_code_lines_file does not exist or it is empty!"
 
-  if [ ! -s "$matrix_file" ]; then
-    echo "Matrix file '$matrix_file' is empty or does not exist" >&2
-    return 1
-  fi
+  mv "$spectra_file" "$tmp_dir/" || return 1
+  spectra_file="$tmp_dir/spectra.csv"
 
-  if [ ! -s "$tests_file" ]; then
-    echo "Tests file '$tests_file' is empty or does not exist" >&2
-    return 1
-  fi
+  mv "$matrix_file" "$tmp_dir/" || return 1
+  matrix_file="$tmp_dir/matrix.txt"
 
-  if [ ! -f "$source_code_lines_file" ]; then
-    echo "Source code line  file '$source_code_lines_file' does not exist" >&2
-    return 1
-  fi
-
-#  # Remove extension
-#  mv "$spectra_file" $(dirname "$spectra_file")/$(basename "$spectra_file" .csv) || return 1
-#  spectra_file=$(dirname "$spectra_file")/$(basename "$spectra_file" .csv)
-#  mv "$matrix_file" $(dirname "$matrix_file")/$(basename "$matrix_file" .txt) || return 1
-#  matrix_file=$(dirname "$matrix_file")/$(basename "$matrix_file" .txt)
-#  mv "$tests_file" $(dirname "$tests_file")/$(basename "$tests_file" .csv) || return 1
-#  tests_file=$(dirname "$tests_file")/$(basename "$tests_file" .csv)
+  mv "$tests_file" "$tmp_dir/" || return 1
+  tests_file="$tmp_dir/tests.csv"
 
   # Remove header
   tail -n +2 "$spectra_file" > "$spectra_file.tmp" && mv -f "$spectra_file.tmp" "$spectra_file" || return 1
   tail -n +2 "$tests_file" > "$tests_file.tmp" && mv -f "$tests_file.tmp" "$tests_file" || return 1
 
-  # Backup
+  # Fix format
+  # Replace / by .
+  sed -i 's/\//./g' "$source_code_lines_tmp_file" || return 1
+  # Remove .java extension
+  sed -i 's/.java#/#/g' "$source_code_lines_tmp_file" || return 1
+
+  # Backup original spectra file
   cp "$spectra_file" $(dirname "$spectra_file")/.spectra || return 1
 
   # Remove inner class(es) names (as there is not a .java file for each one)
@@ -113,22 +144,17 @@ _fault_localization() {
   # Replace class name symbol
   sed -i 's/\$/./g' "$spectra_file" || return 1
 
-  # Replace / by .
-  sed -i 's/\//./g' "$source_code_lines_file" || return 1
-  # Remove .java extension
-  sed -i 's/.java#/#/g' "$source_code_lines_file" || return 1
-
   return 0
 }
 
-##
+#
 # Checks whether a sanity check on the coverage of each triggering test case of
 # a project-bug can or cannot be performed. A sanity check on a project-bug can
 # only be performed if and only if a buggy line / candidate line could be
 # identified in bytecode.
-##
-_is_a_known_exception() {
-  local USAGE="Usage: _is_a_known_exception <pid> <bid>"
+#
+_is_it_a_known_exception() {
+  local USAGE="Usage: ${FUNCNAME[0]} <pid> <bid>"
   if [ "$#" != 2 ]; then
     echo "$USAGE" >&2
     return 1
@@ -136,11 +162,6 @@ _is_a_known_exception() {
 
   local pid="$1"
   local bid="$2"
-
-  if [ "$pid" == "Closure" ] && [ "$bid" == "67" ]; then
-    # there is not a bytecode instruction for the buggy line
-    return 0
-  fi
 
   if [ "$pid" == "Closure" ] && [ "$bid" == "100" ]; then
     # there are two different ways of triggering this bug: either covering the
@@ -152,17 +173,9 @@ _is_a_known_exception() {
   fi
 
   if [ "$pid" == "Closure" ] && [ "$bid" == "103" ]; then
-    # triggering test cases:
-    #   com.google.javascript.jscomp.ControlFlowAnalysisTest::testInstanceOf
-    #   com.google.javascript.jscomp.CheckUnreachableCodeTest::testInstanceOfThrowsException
-    # do not cover faulty class 'com.google.javascript.jscomp.DisambiguateProperties'
-    # and therefore its faulty code, and they do not cover any of the candidate
-    # lines of a missing 'case' of class 'com/google/javascript/jscomp/ControlFlowAnalysis'
-    return 0
-  fi
-
-  if [ "$pid" == "Closure" ] && [ "$bid" == "114" ]; then
-    # there is not a bytecode instruction for the buggy line
+    # there are two faulty classes, however there is one test case that does not
+    # execute any line annotated as FAULT_OMISSION, i.e., it does not execute
+    # any candidate line (manually check and it is correct)
     return 0
   fi
 
@@ -171,24 +184,9 @@ _is_a_known_exception() {
     return 0
   fi
 
-  if [ "$pid" == "Lang" ] && [ "$bid" == "29" ]; then
-    # there is not a bytecode instruction for the buggy line
-    return 0
-  fi
-
-  if [ "$pid" == "Lang" ] && [ "$bid" == "56" ]; then
-    # there is not a bytecode instruction for the buggy lines
-    return 0
-  fi
-
   if [ "$pid" == "Math" ] && [ "$bid" == "12" ]; then
     # there is not a bytecode instruction for the buggy line or the two lines
     # annotated as a 'fault of omission'
-    return 0
-  fi
-
-  if [ "$pid" == "Math" ] && [ "$bid" == "104" ]; then
-    # there is not a bytecode instruction for the buggy line
     return 0
   fi
 
@@ -202,17 +200,5 @@ _is_a_known_exception() {
     return 0
   fi
 
-  if [ "$pid" == "Time" ] && [ "$bid" == "21" ]; then
-    # the coverage of the second triggering test case (i.e.,
-    # org.joda.time.TestDateTimeZone::testGetShortName_berlin) gets mixed due to
-    # the execution of the other test cases in the same test class. this
-    # behaviour has been double checked with the JaCoCo coverage tool and
-    # therefore can be excluded
-    return 0
-  fi
-
   return 1
 }
-
-# EOF
-
