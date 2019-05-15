@@ -245,7 +245,7 @@ echo "[INFO] Has the faulty class(es) been reported? Yes."
 _is_it_a_known_exception "$PID" "$BID"
 is_it_a_known_exception="$?" # 0 yes, 1, no, it is not
 
-buggy_lines_file="$SCRIPT_DIR/../analysis/pipeline-scripts/buggy-lines/$PID-$BID.buggy.lines"
+buggy_lines_file="$D4J_HOME/framework/projects/$PID/buggy_lines/$BID.buggy.lines"
 if [ ! -s "$buggy_lines_file" ]; then
   echo "[ERROR] $buggy_lines_file does not exist or it is empty!"
   rm -rf "$tmp_dir"
@@ -253,13 +253,13 @@ if [ ! -s "$buggy_lines_file" ]; then
 fi
 num_buggy_lines=$(wc -l "$buggy_lines_file" | cut -f1 -d' ')
 
-unrankable_lines_file="$SCRIPT_DIR/../analysis/pipeline-scripts/buggy-lines/$PID-$BID.unrankable.lines"
+unrankable_lines_file="$D4J_HOME/framework/projects/$PID/buggy_lines/$BID.unrankable.lines"
 num_unrankable_lines=0
 if [ -f "$unrankable_lines_file" ]; then
   num_unrankable_lines=$(wc -l "$unrankable_lines_file" | cut -f1 -d' ')
 fi
 
-candidates_file="$SCRIPT_DIR/../analysis/pipeline-scripts/buggy-lines/$PID-$BID.candidates"
+candidates_file="$D4J_HOME/framework/projects/$PID/buggy_lines/$BID.candidates"
 
 if [ "$is_it_a_known_exception" == "0" ]; then
   echo "[INFO] Does spectra file include at least one buggy-line? It is a known exception therefore check is not performed."
