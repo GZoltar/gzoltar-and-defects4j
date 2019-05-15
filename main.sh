@@ -313,40 +313,6 @@ elif [ "$num_buggy_lines" -ne "$num_unrankable_lines" ]; then
   fi
 
   if [[ $at_least_one_buggy_line_in_spectra_file == false ]]; then
-    # last chance to check it
-    if [ "$PID" == "Closure" ]; then
-      if [ "$BID" == "6900590" ]; then
-        if grep -q "^com.google.javascript.jscomp.TypeCheck#1580$" "$SPECTRA_FILE"; then
-          echo "[DEBUG] Extra candidate com.google.javascript.jscomp.TypeCheck#1580 has indeed been reported"
-          at_least_one_buggy_line_in_spectra_file=true
-        fi
-      elif [ "$BID" == "9600528" ]; then
-        if grep -q "^com.google.javascript.jscomp.TypeCheck#1408$" "$SPECTRA_FILE"; then
-          echo "[DEBUG] Extra candidate com.google.javascript.jscomp.TypeCheck#1408 has indeed been reported"
-          at_least_one_buggy_line_in_spectra_file=true
-        fi
-      elif [ "$BID" == "11700217" ]; then
-        if grep -q "^com.google.javascript.jscomp.TypeValidator#734$" "$SPECTRA_FILE"; then
-          echo "[DEBUG] Extra candidate com.google.javascript.jscomp.TypeValidator#734 has indeed been reported"
-          at_least_one_buggy_line_in_spectra_file=true
-        fi
-      elif [ "$BID" == "11700218" ]; then
-        if grep -q "^com.google.javascript.jscomp.TypeValidator#734$" "$SPECTRA_FILE"; then
-          echo "[DEBUG] Extra candidate com.google.javascript.jscomp.TypeValidator#734 has indeed been reported"
-          at_least_one_buggy_line_in_spectra_file=true
-        fi
-      fi
-    elif [ "$PID" == "Mockito" ]; then
-      if [ "$BID" == "2500018" ]; then
-        if grep -q "^org.mockito.internal.stubbing.defaultanswers.ReturnsDeepStubs#88$" "$SPECTRA_FILE"; then
-          echo "[DEBUG] Extra candidate org.mockito.internal.stubbing.defaultanswers.ReturnsDeepStubs#88 has indeed been reported"
-          at_least_one_buggy_line_in_spectra_file=true
-        fi
-      fi
-    fi
-  fi
-
-  if [[ $at_least_one_buggy_line_in_spectra_file == false ]]; then
     echo "[ERROR] Does spectra file include at least one buggy-line? No."
     rm -rf "$tmp_dir"
     exit 1
