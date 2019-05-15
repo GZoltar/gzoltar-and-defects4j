@@ -128,9 +128,9 @@ _run_gzoltar() {
 
   # Fix format
   # Replace / by .
-  sed -i 's/\//./g' "$source_code_lines_tmp_file" || return 1
+  sed -i 's/\//./g' "$source_code_lines_file" || return 1
   # Remove .java extension
-  sed -i 's/.java#/#/g' "$source_code_lines_tmp_file" || return 1
+  sed -i 's/.java#/#/g' "$source_code_lines_file" || return 1
 
   # Backup original spectra file
   cp "$spectra_file" $(dirname "$spectra_file")/.spectra || return 1
