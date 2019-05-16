@@ -46,403 +46,108 @@ jobs:
   include:
     - stage: Test
 # Chart
-      script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Chart 1
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Chart 2
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Chart 3
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Chart 4
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Chart 5
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Chart 6
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Chart 7
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Chart 8
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Chart 9
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Chart 10
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Chart 11
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Chart 12
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Chart 13
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Chart 14
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Chart 15
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Chart 16
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Chart 17
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Chart 18
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Chart 19
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Chart 20
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Chart 21
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Chart 22
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Chart 23
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Chart 24
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Chart 25
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Chart 26
+      script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Chart $(shuf -i 1-26 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Chart $(shuf -i 1-26 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Chart $(shuf -i 1-26 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Chart $(shuf -i 1-26 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Chart $(shuf -i 1-26 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Chart $(shuf -i 1-26 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Chart $(shuf -i 1-26 -n 1)
 # Closure
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 1
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 2
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 3
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 4
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 5
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 6
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 7
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 8
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 9
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 10
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 11
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 12
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 13
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 14
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 15
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 16
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 17
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 18
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 19
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 20
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 21
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 22
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 23
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 24
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 25
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 26
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 27
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 28
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 29
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 30
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 31
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 32
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 33
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 34
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 35
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 36
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 37
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 38
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 39
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 40
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 41
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 42
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 43
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 44
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 45
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 46
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 47
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 48
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 49
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 50
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 51
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 52
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 53
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 54
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 55
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 56
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 57
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 58
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 59
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 60
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 61
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 62
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 63
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 64
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 65
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 66
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 67
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 68
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 69
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 70
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 71
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 72
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 73
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 74
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 75
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 76
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 77
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 78
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 79
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 80
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 81
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 82
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 83
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 84
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 85
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 86
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 87
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 88
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 89
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 90
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 91
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 92
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 93
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 94
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 95
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 96
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 97
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 98
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 99
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 100
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 101
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 102
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 103
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 104
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 105
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 106
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 107
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 108
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 109
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 110
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 111
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 112
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 113
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 114
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 115
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 116
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 117
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 118
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 119
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 120
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 121
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 122
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 123
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 124
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 125
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 126
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 127
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 128
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 129
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 130
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 131
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 132
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure 133
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure $(shuf -i 1-133 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure $(shuf -i 1-133 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure $(shuf -i 1-133 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure $(shuf -i 1-133 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure $(shuf -i 1-133 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure $(shuf -i 1-133 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure $(shuf -i 1-133 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure $(shuf -i 1-133 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure $(shuf -i 1-133 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure $(shuf -i 1-133 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure $(shuf -i 1-133 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure $(shuf -i 1-133 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure $(shuf -i 1-133 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure $(shuf -i 1-133 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure $(shuf -i 1-133 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure $(shuf -i 1-133 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure $(shuf -i 1-133 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure $(shuf -i 1-133 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure $(shuf -i 1-133 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure $(shuf -i 1-133 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure $(shuf -i 1-133 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure $(shuf -i 1-133 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure $(shuf -i 1-133 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure $(shuf -i 1-133 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure $(shuf -i 1-133 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure $(shuf -i 1-133 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure $(shuf -i 1-133 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure $(shuf -i 1-133 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure $(shuf -i 1-133 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure $(shuf -i 1-133 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure $(shuf -i 1-133 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure $(shuf -i 1-133 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Closure $(shuf -i 1-133 -n 1)
 # Lang
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Lang 1
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Lang 2
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Lang 3
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Lang 4
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Lang 5
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Lang 6
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Lang 7
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Lang 8
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Lang 9
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Lang 10
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Lang 11
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Lang 12
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Lang 13
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Lang 14
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Lang 15
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Lang 16
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Lang 17
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Lang 18
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Lang 19
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Lang 20
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Lang 21
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Lang 22
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Lang 23
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Lang 24
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Lang 25
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Lang 26
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Lang 27
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Lang 28
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Lang 29
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Lang 30
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Lang 31
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Lang 32
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Lang 33
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Lang 34
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Lang 35
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Lang 36
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Lang 37
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Lang 38
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Lang 39
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Lang 40
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Lang 41
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Lang 42
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Lang 43
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Lang 44
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Lang 45
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Lang 46
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Lang 47
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Lang 48
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Lang 49
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Lang 50
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Lang 51
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Lang 52
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Lang 53
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Lang 54
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Lang 55
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Lang 56
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Lang 57
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Lang 58
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Lang 59
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Lang 60
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Lang 61
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Lang 62
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Lang 63
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Lang 64
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Lang 65
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Lang $(shuf -i 1-65 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Lang $(shuf -i 1-65 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Lang $(shuf -i 1-65 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Lang $(shuf -i 1-65 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Lang $(shuf -i 1-65 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Lang $(shuf -i 1-65 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Lang $(shuf -i 1-65 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Lang $(shuf -i 1-65 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Lang $(shuf -i 1-65 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Lang $(shuf -i 1-65 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Lang $(shuf -i 1-65 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Lang $(shuf -i 1-65 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Lang $(shuf -i 1-65 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Lang $(shuf -i 1-65 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Lang $(shuf -i 1-65 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Lang $(shuf -i 1-65 -n 1)
 # Math
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 1
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 2
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 3
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 4
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 5
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 6
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 7
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 8
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 9
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 10
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 11
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 12
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 13
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 14
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 15
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 16
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 17
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 18
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 19
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 20
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 21
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 22
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 23
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 24
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 25
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 26
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 27
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 28
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 29
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 30
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 31
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 32
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 33
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 34
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 35
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 36
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 37
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 38
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 39
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 40
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 41
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 42
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 43
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 44
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 45
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 46
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 47
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 48
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 49
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 50
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 51
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 52
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 53
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 54
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 55
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 56
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 57
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 58
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 59
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 60
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 61
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 62
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 63
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 64
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 65
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 66
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 67
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 68
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 69
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 70
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 71
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 72
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 73
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 74
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 75
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 76
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 77
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 78
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 79
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 80
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 81
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 82
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 83
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 84
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 85
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 86
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 87
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 88
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 89
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 90
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 91
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 92
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 93
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 94
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 95
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 96
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 97
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 98
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 99
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 100
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 101
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 102
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 103
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 104
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 105
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math 106
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math $(shuf -i 1-106 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math $(shuf -i 1-106 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math $(shuf -i 1-106 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math $(shuf -i 1-106 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math $(shuf -i 1-106 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math $(shuf -i 1-106 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math $(shuf -i 1-106 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math $(shuf -i 1-106 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math $(shuf -i 1-106 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math $(shuf -i 1-106 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math $(shuf -i 1-106 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math $(shuf -i 1-106 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math $(shuf -i 1-106 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math $(shuf -i 1-106 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math $(shuf -i 1-106 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math $(shuf -i 1-106 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math $(shuf -i 1-106 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math $(shuf -i 1-106 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math $(shuf -i 1-106 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math $(shuf -i 1-106 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math $(shuf -i 1-106 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math $(shuf -i 1-106 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math $(shuf -i 1-106 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math $(shuf -i 1-106 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math $(shuf -i 1-106 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math $(shuf -i 1-106 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Math $(shuf -i 1-106 -n 1)
 # Mockito
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Mockito 1
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Mockito 2
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Mockito 3
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Mockito 4
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Mockito 5
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Mockito 6
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Mockito 7
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Mockito 8
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Mockito 9
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Mockito 10
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Mockito 11
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Mockito 12
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Mockito 13
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Mockito 14
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Mockito 15
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Mockito 16
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Mockito 17
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Mockito 18
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Mockito 19
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Mockito 20
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Mockito 21
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Mockito 22
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Mockito 23
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Mockito 24
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Mockito 25
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Mockito 26
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Mockito 27
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Mockito 28
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Mockito 29
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Mockito 30
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Mockito 31
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Mockito 32
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Mockito 33
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Mockito 34
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Mockito 35
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Mockito 36
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Mockito 37
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Mockito 38
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Mockito $(shuf -i 1-38 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Mockito $(shuf -i 1-38 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Mockito $(shuf -i 1-38 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Mockito $(shuf -i 1-38 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Mockito $(shuf -i 1-38 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Mockito $(shuf -i 1-38 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Mockito $(shuf -i 1-38 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Mockito $(shuf -i 1-38 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Mockito $(shuf -i 1-38 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Mockito $(shuf -i 1-38 -n 1)
 # Time
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Time 1
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Time 2
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Time 3
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Time 4
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Time 5
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Time 6
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Time 7
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Time 8
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Time 9
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Time 10
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Time 11
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Time 12
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Time 13
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Time 14
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Time 15
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Time 16
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Time 17
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Time 18
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Time 19
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Time 20
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Time 21
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Time 22
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Time 23
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Time 24
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Time 25
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Time 26
-    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Time 27
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Time $(shuf -i 1-27 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Time $(shuf -i 1-27 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Time $(shuf -i 1-27 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Time $(shuf -i 1-27 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Time $(shuf -i 1-27 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Time $(shuf -i 1-27 -n 1)
+    - script: travis_wait 40 carton exec $TRAVIS_BUILD_DIR/main.sh Time $(shuf -i 1-27 -n 1)
