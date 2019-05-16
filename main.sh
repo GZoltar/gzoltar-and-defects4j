@@ -44,6 +44,10 @@ USAGE="Usage: $0 <pid> <bid>"
 PID="$1"
 BID="$2"
 
+TMP_DIR="/tmp/$USER-$$-$PID-$BID"
+rm -rf "$TMP_DIR"
+mkdir -p "$TMP_DIR"
+
 # --------------------------------------------------------------------------- FL
 
 echo "PID: $$"
@@ -54,30 +58,30 @@ python --version
 
 echo ""
 echo "[INFO] Checkout $PID-${BID}b"
-tmp_dir=$(_checkout "$PID" "$BID" "b")
+_checkout "$PID" "$BID" "b" "$TMP_DIR"
 if [ $? -ne 0 ]; then
   echo "[ERROR] Checkout of the $PID-${BID}b version has failed!"
-  rm -rf "$tmp_dir"
+  rm -rf "$TMP_DIR"
   exit 1
 fi
 
 echo ""
 echo "[INFO] Run GZoltar on $PID-${BID}b"
 echo "[INFO] Start: $(date)"
-_run_gzoltar "$PID" "$BID" "$tmp_dir"
+_run_gzoltar "$PID" "$BID" "$TMP_DIR"
 if [ $? -ne 0 ]; then
   echo "[ERROR] Execution of GZoltar on $PID-${BID}b has failed!"
-  rm -rf "$tmp_dir"
+  rm -rf "$TMP_DIR"
   exit 1
 fi
 echo "[INFO] End: $(date)"
 
 # ---------------------------------------------------------------- Sanity checks
 
-TESTS_FILE="$tmp_dir/tests.csv"
-SPECTRA_FILE="$tmp_dir/spectra.csv"
-MATRIX_FILE="$tmp_dir/matrix.txt"
-SOURCE_CODE_LINES="$tmp_dir/source_code_lines.txt"
+TESTS_FILE="$TMP_DIR/tests.csv"
+SPECTRA_FILE="$TMP_DIR/spectra.csv"
+MATRIX_FILE="$TMP_DIR/matrix.txt"
+SOURCE_CODE_LINES="$TMP_DIR/source_code_lines.txt"
 
 echo ""
 echo "[INFO] Running a few sanity checks on $PID-${BID}b"
@@ -100,10 +104,11 @@ if [ "$num_triggering_test_cases_gzoltar" -ne "$num_triggering_test_cases_d4j" ]
   echo ""
   echo "[INFO] Running each test case annotated by D4J as a trigger test case in isolation"
 
-  tmp_sanity_check_dir=$(_checkout "$PID" "$BID" "b")
+  tmp_sanity_check_dir="/tmp/$USER-$$-$PID-$BID-sanity-check"
+  _checkout "$PID" "$BID" "b" "$tmp_sanity_check_dir"
   if [ $? -ne 0 ]; then
     echo "[ERROR] Checkout of $PID-${BID}b has failed!"
-    rm -rf "$tmp_dir" "$tmp_sanity_check_dir"
+    rm -rf "$TMP_DIR" "$tmp_sanity_check_dir"
     exit 1
   fi
 
@@ -112,7 +117,7 @@ if [ "$num_triggering_test_cases_gzoltar" -ne "$num_triggering_test_cases_d4j" ]
     "$D4J_HOME/framework/bin/defects4j" compile
     if [ $? -ne 0 ]; then
       echo "[ERROR] Compilation of $PID-${BID}b has failed!"
-      rm -rf "$tmp_dir" "$tmp_sanity_check_dir"
+      rm -rf "$TMP_DIR" "$tmp_sanity_check_dir"
       exit 1
     fi
   popd > /dev/null 2>&1
@@ -126,7 +131,7 @@ if [ "$num_triggering_test_cases_gzoltar" -ne "$num_triggering_test_cases_d4j" ]
       rm -f "$tmp_sanity_check_dir/failing_tests" && touch "$tmp_sanity_check_dir/failing_tests" && "$D4J_HOME/framework/bin/defects4j" test -t "$d4j_trigger_test_name"
       if [ $? -ne 0 ]; then
         echo "[ERROR] Execution of D4J -- $d4j_trigger_test_name in isolation has failed!"
-        rm -rf "$tmp_dir" "$tmp_sanity_check_dir"
+        rm -rf "$TMP_DIR" "$tmp_sanity_check_dir"
         exit 1
       fi
 
@@ -151,14 +156,14 @@ if [ "$num_triggering_test_cases_gzoltar" -ne "$num_triggering_test_cases_d4j" ]
       rm -f "$tmp_sanity_check_dir/failing_tests" && touch "$tmp_sanity_check_dir/failing_tests" && "$D4J_HOME/framework/bin/defects4j" test -t "$gz_trigger_test_name"
       if [ $? -ne 0 ]; then
         echo "[ERROR] Execution of GZoltar -- $gz_trigger_test_name in isolation has failed!"
-        rm -rf "$tmp_dir" "$tmp_sanity_check_dir"
+        rm -rf "$TMP_DIR" "$tmp_sanity_check_dir"
         exit 1
       fi
 
       trigger_stack_trace_length=$(wc -l "$tmp_sanity_check_dir/failing_tests" | cut -f1 -d' ')
       if [ "$trigger_stack_trace_length" -eq "0" ]; then
         echo "[ERROR] Test case '$gz_trigger_test_name' annotated by GZoltar as a failing test case does not fail when executed in isolation!"
-        rm -rf "$tmp_dir" "$tmp_sanity_check_dir"
+        rm -rf "$TMP_DIR" "$tmp_sanity_check_dir"
         exit 1
       fi
     done < <(grep -a ",FAIL," "$TESTS_FILE")
@@ -204,7 +209,7 @@ if [ "$ignore_d4j_list_of_trigger_tests" == "1" ]; then
 
   if [[ $agree == false ]]; then
     echo "[ERROR] Has GZoltar reported the trigger test cases reported by D4J? No."
-    rm -rf "$tmp_dir"
+    rm -rf "$TMP_DIR"
     exit 1
   else
     echo "[INFO] Has GZoltar reported the trigger test cases reported by D4J? Yes."
@@ -234,7 +239,7 @@ if [ "$num_classes_not_reported" -eq "1" ] && [ "$PID" == "Mockito" ] && [ "$BID
   echo "Mockito-19 excluded from the check on the number of modified classes reported as one modified class is an interface without code to which GZoltar does not report any line."
 elif [ "$num_classes_not_reported" -ne "0" ]; then
   echo "[ERROR] Has the faulty class(es) been reported? No."
-  rm -rf "$tmp_dir"
+  rm -rf "$TMP_DIR"
   exit 1
 fi
 
@@ -248,7 +253,7 @@ is_it_a_known_exception="$?" # 0 yes, 1, no, it is not
 buggy_lines_file="$D4J_HOME/framework/projects/$PID/buggy_lines/$BID.buggy.lines"
 if [ ! -s "$buggy_lines_file" ]; then
   echo "[ERROR] $buggy_lines_file does not exist or it is empty!"
-  rm -rf "$tmp_dir"
+  rm -rf "$TMP_DIR"
   exit 1
 fi
 num_buggy_lines=$(wc -l "$buggy_lines_file" | cut -f1 -d' ')
@@ -314,7 +319,7 @@ elif [ "$num_buggy_lines" -ne "$num_unrankable_lines" ]; then
 
   if [[ $at_least_one_buggy_line_in_spectra_file == false ]]; then
     echo "[ERROR] Does spectra file include at least one buggy-line? No."
-    rm -rf "$tmp_dir"
+    rm -rf "$TMP_DIR"
     exit 1
   else
     echo "[INFO] Does spectra file include at least one buggy-line? Yes."
@@ -337,7 +342,7 @@ elif [ "$num_buggy_lines" -ne "$num_unrankable_lines" ]; then
     failing_test_name=$(sed "${failing_test_id}q;d" "$TESTS_FILE" | cut -f1 -d',')
     echo "[DEBUG] Test case '$failing_test_name' ($failing_test_id)"
 
-    test_cov_file="$tmp_dir/$USER-test-$failing_test_id-covered-components-$$.txt"
+    test_cov_file="$TMP_DIR/$USER-test-$failing_test_id-covered-components-$$.txt"
     echo "$test_coverage" | cut -f2 -d':' | awk '{for (i = 1; i <= NF; ++i) if ($i == 1) print i}' > "$test_cov_file"
 
     while read -r buggy_line; do
@@ -397,7 +402,7 @@ elif [ "$num_buggy_lines" -ne "$num_unrankable_lines" ]; then
 
     if [[ $false_positive == true ]]; then
       echo "[ERROR] Test case '$failing_test_name' ($failing_test_id) does not cover any buggy line!"
-      rm -rf "$tmp_dir"
+      rm -rf "$TMP_DIR"
       exit 1
     fi
   done < <(grep -n " -$" "$MATRIX_FILE")
@@ -408,7 +413,7 @@ else
 fi
 
 # Clean up
-rm -rf "$tmp_dir"
+rm -rf "$TMP_DIR"
 
 echo "DONE!"
 exit 0

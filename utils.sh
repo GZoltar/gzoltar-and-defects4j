@@ -27,8 +27,8 @@ die() {
 # Checkouts a D4J's project-bug.
 #
 _checkout() {
-  local USAGE="Usage: ${FUNCNAME[0]} <pid> <bid> <fixed (f) or buggy (b)>"
-  if [ "$#" != 3 ]; then
+  local USAGE="Usage: ${FUNCNAME[0]} <pid> <bid> <fixed (f) or buggy (b)> <output_dir>"
+  if [ "$#" != 4 ]; then
     echo "$USAGE" >&2
     return 1
   fi
@@ -36,22 +36,9 @@ _checkout() {
   local pid="$1"
   local bid="$2"
   local version="$3" # either b or f
+  local output_dir="$4"
 
-  local output_dir="/tmp/$USER-$$-$pid-$bid"
-  rm -rf "$output_dir"; mkdir -p "$output_dir"
-  "$D4J_HOME/framework/bin/defects4j" checkout -p "$pid" -v "${bid}$version" -w "$output_dir"
-  if [ $? -ne 0 ]; then
-    if _am_I_a_cluster; then
-      rm -rf "$output_dir"
-
-      # trying another directory
-      output_dir="/scratch/$USER-$$-$pid-$bid"
-      rm -rf "$output_dir"; mkdir -p "$output_dir"
-      "$D4J_HOME/framework/bin/defects4j" checkout -p "$pid" -v "${bid}$version" -w "$output_dir" || return 1
-    else
-      return 1
-    fi
-  fi
+  "$D4J_HOME/framework/bin/defects4j" checkout -p "$pid" -v "${bid}$version" -w "$output_dir" || return 1
 
   if [ "$pid" == "Time" ]; then
     if [ "$bid" -eq "18" ] || [ "$bid" -eq "22" ] || [ "$bid" -eq "24" ] || [ "$bid" -eq "27" ]; then
@@ -72,7 +59,6 @@ _checkout() {
     fi
   fi
 
-  echo "$output_dir"
   return 0
 }
 
